@@ -145,6 +145,34 @@ void LightNode::setParamI( int param, int value )
 	return SceneNode::setParamI( param, value );
 }
 
+int LightNode::getShadowMapCount() const
+{
+    return _shadowMapCount;
+}
+
+void LightNode::setShadowMapCount(int value)
+{
+    if (value == 0 || value == 1 || value == 2 || value == 3 || value == 4)
+        _shadowMapCount = (uint32)value;
+    else
+        Modules::setError("Invalid value in h3dSetNodeParamI for H3DLight::setShadowMapCount");
+}
+
+int LightNode::getMaterialRes() const
+{
+    if (_materialRes != 0x0) return _materialRes->getHandle();
+    return 0;
+}
+
+void LightNode::setMaterialRes(int value)
+{
+    auto res = Modules::resMan().resolveResHandle(value);
+    if (res == 0x0 || res->getType() == ResourceTypes::Material)
+        _materialRes = (MaterialResource *)res;
+    else
+        Modules::setError("Invalid handle in h3dSetNodeParamI for H3DLight::setMaterialRes");
+}
+
 
 float LightNode::getParamF( int param, int compIdx ) const
 {
@@ -167,6 +195,14 @@ float LightNode::getParamF( int param, int compIdx ) const
 
 	return SceneNode::getParamF( param, compIdx );
 }
+
+Vec3f LightNode::getColor() const { return _diffuseCol; }
+float LightNode::getRadius() const { return _radius; }
+float LightNode::getFOV() const { return _fov; }
+float LightNode::getShadowSplitLambda() const { return _shadowSplitLambda; }
+float LightNode::getShadowBias() const { return _shadowMapBias; }
+float LightNode::getColorMult() const { return _diffuseColMult; }
+
 
 
 void LightNode::setParamF( int param, int compIdx, float value )
@@ -202,6 +238,12 @@ void LightNode::setParamF( int param, int compIdx, float value )
 	SceneNode::setParamF( param, compIdx, value );
 }
 
+void LightNode::setColor(const Vec3f& value) { _diffuseCol = value; }
+void LightNode::setRadius(float value) { _radius = value; markDirty(); }
+void LightNode::setFOV(float value) { _fov = value; markDirty(); }
+void LightNode::setShadowSplitLambda(float value) { _shadowSplitLambda = value; }
+void LightNode::setShadowBias(float value) { _shadowMapBias = value; }
+void LightNode::setColorMult(float value) { _diffuseColMult = value; }
 
 const char *LightNode::getParamStr( int param ) const
 {

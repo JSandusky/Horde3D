@@ -153,6 +153,16 @@ const char *SceneNode::getParamStr( int param ) const
 	return "";
 }
 
+const char* SceneNode::getAttachment() const { return _attachment.c_str(); }
+void SceneNode::setName(const char* str)
+{
+    _name = str;
+}
+void SceneNode::setAttachment(const char* str)
+{
+    _attachment = str;
+}
+
 void SceneNode::setParamStr( int param, const char *value )
 {
 	switch( param )

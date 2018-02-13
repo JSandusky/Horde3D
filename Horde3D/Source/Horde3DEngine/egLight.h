@@ -83,6 +83,25 @@ public:
 	const Frustum &getFrustum() const { return _frustum; }
 	const Matrix4f &getViewMat() const { return _viewMat; }
 
+    int getShadowMapCount() const;
+    void setShadowMapCount(int ct);
+    int getMaterialRes() const;
+    void setMaterialRes(int res);
+
+    Vec3f getColor() const;
+    float getRadius() const;
+    float getFOV() const;
+    float getShadowSplitLambda() const;
+    float getShadowBias() const;
+    float getColorMult() const;
+
+    void setColor(const Vec3f& value);
+    void setRadius(float value);
+    void setFOV(float value);
+    void setShadowSplitLambda(float value);
+    void setShadowBias(float value);
+    void setColorMult(float value);
+
 private:
 	LightNode( const LightNodeTpl &lightTpl );
 	~LightNode();

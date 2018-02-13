@@ -114,6 +114,10 @@ public:
 	virtual const char *getParamStr( int param ) const;
 	virtual void setParamStr( int param, const char* value );
 
+    const char* getAttachment() const;
+    void setName(const char*);
+    void setAttachment(const char*);
+
 	virtual uint32 calcLodLevel( const Vec3f &viewPoint ) const;
 	virtual bool checkLodCorrectness( uint32 lodLevel ) const;
 

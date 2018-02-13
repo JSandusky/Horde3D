@@ -63,7 +63,8 @@ struct ParticleChannel
 
 // =================================================================================================
 
-class ParticleEffectResource : public Resource
+class ParticleEffectResource
+    : public Resource
 {
 public:
 	static Resource *factoryFunc( const std::string &name, int flags )
